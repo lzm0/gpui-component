@@ -39,6 +39,7 @@ pub mod progress;
 pub mod radio;
 pub mod resizable;
 pub mod scroll;
+pub mod segmented;
 pub mod sidebar;
 pub mod skeleton;
 pub mod slider;

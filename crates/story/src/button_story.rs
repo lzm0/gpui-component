@@ -8,6 +8,7 @@ use ui::{
     checkbox::Checkbox,
     h_flex,
     prelude::FluentBuilder,
+    segmented::Segmented,
     v_flex, ActiveTheme, Disableable as _, Icon, IconName, Selectable as _, Sizable as _, Theme,
 };
 
@@ -549,6 +550,35 @@ impl Render for ButtonStory {
                                     })),
                             ),
                     ),
+            )
+            .child(
+                section("Segmented", cx).child(
+                    Segmented::new()
+                        .child(
+                            Button::new("button-one")
+                                .label("One")
+                                .disabled(disabled)
+                                .selected(selected)
+                                .when(compact, |this| this.compact())
+                                .on_click(Self::on_click),
+                        )
+                        .child(
+                            Button::new("button-two")
+                                .label("Two")
+                                .disabled(disabled)
+                                .selected(selected)
+                                .when(compact, |this| this.compact())
+                                .on_click(Self::on_click),
+                        )
+                        .child(
+                            Button::new("button-three")
+                                .label("Three")
+                                .disabled(disabled)
+                                .selected(selected)
+                                .when(compact, |this| this.compact())
+                                .on_click(Self::on_click),
+                        ),
+                ),
             )
             .child(
                 section("Dropdown Button", cx)
