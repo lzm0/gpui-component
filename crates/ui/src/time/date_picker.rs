@@ -99,7 +99,7 @@ impl DatePicker {
 
         let calendar = cx.new(|cx| {
             let mut this = Calendar::new(window, cx);
-            this.set_date(date, window, cx);
+            this.set_date(date, cx);
             this
         });
 
@@ -177,10 +177,10 @@ impl DatePicker {
         self.update_date(date.into(), false, window, cx);
     }
 
-    fn update_date(&mut self, date: Date, emit: bool, window: &mut Window, cx: &mut Context<Self>) {
+    fn update_date(&mut self, date: Date, emit: bool, _: &mut Window, cx: &mut Context<Self>) {
         self.date = date;
         self.calendar.update(cx, |view, cx| {
-            view.set_date(date, window, cx);
+            view.set_date(date, cx);
         });
         self.open = false;
         if emit {

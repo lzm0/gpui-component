@@ -182,7 +182,7 @@ impl Calendar {
     /// Set the date of the calendar.
     ///
     /// When you set a range date, the mode will be automatically set to `Mode::Range`.
-    pub fn set_date(&mut self, date: impl Into<Date>, _: &mut Window, cx: &mut Context<Self>) {
+    pub fn set_date(&mut self, date: impl Into<Date>, cx: &mut Context<Self>) {
         self.date = date.into();
 
         match self.date {
@@ -433,24 +433,24 @@ impl Calendar {
         .when(is_today && !is_active, |this| {
             this.border_1().border_color(cx.theme().border)
         }) // Add border for today
-        .on_click(cx.listener(move |view, _: &ClickEvent, window, cx| {
+        .on_click(cx.listener(move |view, _: &ClickEvent, _, cx| {
             if view.date.is_single() {
-                view.set_date(date, window, cx);
+                view.set_date(date, cx);
                 cx.emit(CalendarEvent::Selected(view.date()));
             } else {
                 let start = view.date.start();
                 let end = view.date.end();
 
                 if start.is_none() && end.is_none() {
-                    view.set_date(Date::Range(Some(date), None), window, cx);
+                    view.set_date(Date::Range(Some(date), None), cx);
                 } else if start.is_some() && end.is_none() {
                     if date < start.unwrap() {
-                        view.set_date(Date::Range(Some(date), None), window, cx);
+                        view.set_date(Date::Range(Some(date), None), cx);
                     } else {
-                        view.set_date(Date::Range(Some(start.unwrap()), Some(date)), window, cx);
+                        view.set_date(Date::Range(Some(start.unwrap()), Some(date)), cx);
                     }
                 } else {
-                    view.set_date(Date::Range(Some(date), None), window, cx);
+                    view.set_date(Date::Range(Some(date), None), cx);
                 }
 
                 if view.date.is_complete() {
