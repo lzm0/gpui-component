@@ -38,6 +38,7 @@ pub mod link;
 pub mod list;
 pub mod modal;
 pub mod notification;
+pub mod plot;
 pub mod popover;
 pub mod popup_menu;
 pub mod progress;
@@ -54,6 +55,7 @@ pub mod tag;
 pub mod text;
 pub mod theme;
 pub mod tooltip;
+
 #[cfg(feature = "webview")]
 pub mod webview;
 
